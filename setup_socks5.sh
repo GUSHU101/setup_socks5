@@ -1,27 +1,34 @@
 #!/bin/bash
 
-# 更新系统并安装必要的软件包
-sudo apt update && sudo apt upgrade -y
+# 更新系统
+sudo apt update
+sudo apt upgrade -y
+
+# 安装 Shadowsocks-libev 和其他必要的软件
 sudo apt install -y shadowsocks-libev
 
-# 创建配置文件目录
-sudo mkdir -p /etc/shadowsocks-libev
-
-# 生成Shadowsocks配置文件
-sudo tee /etc/shadowsocks-libev/config.json > /dev/null <<EOL
+# 创建 Shadowsocks 配置文件
+sudo tee /etc/shadowsocks-libev/config.json > /dev/null <<EOF
 {
-    "server": "0.0.0.0",           // 监听所有 IP 地址
-    "server_port": 8388,           // 代理服务器的端口号
-    "local_port": 8388,            // 本地监听端口号
-    "password": "yourpassword",    // 设置代理服务器的密码
-    "timeout": 60,
-    "method": "chacha20-ietf-poly1305",  // 加密方式
-    "mode": "tcp_and_udp"          // 支持TCP和UDP
+    "server": "0.0.0.0",     
+    "server_port": 8388,        
+    "local_address": "127.0.0.1", 
+    "local_port": 1080,           
+    "password": "123456", 
+    "timeout": 60,                
+    "method": "chacha20-ietf-poly1305"  
 }
-EOL
+EOF
 
-# 启动并启用 Shadowsocks 服务
+# 设置服务开机自启
 sudo systemctl enable shadowsocks-libev
+
+# 启动 Shadowsocks 服务
 sudo systemctl start shadowsocks-libev
 
-echo "Socks5 代理已配置并启动。"
+# 检查 Shadowsocks 服务状态
+sudo systemctl status shadowsocks-libev
+
+# 输出服务日志（如果有问题）
+echo "查看日志以调试问题："
+sudo journalctl -u shadowsocks-libev
