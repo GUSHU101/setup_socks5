@@ -10,13 +10,13 @@ sudo apt install -y shadowsocks-libev
 # 创建 Shadowsocks 配置文件
 sudo tee /etc/shadowsocks-libev/config.json > /dev/null <<EOF
 {
-    "server": "0.0.0.0",     
-    "server_port": 8388,        
-    "local_address": "127.0.0.1", 
-    "local_port": 1080,           
-    "password": "123456", 
-    "timeout": 60,                
-    "method": "chacha20-ietf-poly1305"  
+    "server": "0.0.0.0",           
+    "server_port": 8388,           
+    "local_address": "127.0.0.1",  
+    "local_port": 1080,            
+    "password": "your_password",   
+    "timeout": 60,                 
+    "method": "chacha20-ietf-poly1305" 
 }
 EOF
 
