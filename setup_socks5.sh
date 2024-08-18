@@ -12,7 +12,7 @@ sudo tee /etc/shadowsocks-libev/config.json > /dev/null <<EOL
 {
     "server": "0.0.0.0",           // 监听所有 IP 地址
     "server_port": 8388,           // 代理服务器的端口号
-    "local_port": 1080,            // 本地监听端口号
+    "local_port": 8388,            // 本地监听端口号
     "password": "yourpassword",    // 设置代理服务器的密码
     "timeout": 60,
     "method": "chacha20-ietf-poly1305",  // 加密方式
